@@ -1,0 +1,58 @@
+<mat-toolbar *ngIf="User != 'USER'">Clientes</mat-toolbar>
+
+<div class="clientsform" *ngIf="User != 'USER'">
+  <div class="example-header">
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Buscar clientes"
+      />
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nombre
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.customerName }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        LastName
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.customerLastName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loc">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Linea de Credito
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row.loc.avalibleLineOfCredit }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button
+          mat-button
+          color="primary"
+          (click)="EditClient(row)"
+          matTooltip="Edite todos los valores del cliente"
+        >
+          Ver Perfil de cliente
+        </button>
+        <button mat-button color="accent" (click)="delete(row)">
+          Eliminar
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<br />
+<div *ngIf="User == 'USER'"></div>

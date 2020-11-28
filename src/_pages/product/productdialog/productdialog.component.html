@@ -1,0 +1,71 @@
+<form [formGroup]="form" (ngSubmit)="registerOrUpdate()">
+  <mat-tab-group>
+    <mat-tab label="Producto">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Nombre del producto"
+          formControlName="productName"
+          [formGroup]="form"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Precio"
+          type="number"
+          formControlName="productPrice"
+          [formGroup]="form"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          placeholder="Stock"
+          formControlName="stock"
+          [formGroup]="form"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          placeholder="Dia de venta"
+          formControlName="sellDay"
+          [formGroup]="form"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category" required [formGroup]="form">
+          <mat-option *ngFor="let opcion of opciones" [value]="opcion">
+            {{ opcion.product_CategoryName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Url de la imagen"
+          formControlName="imageUrl"
+          [formGroup]="form"
+        />
+      </mat-form-field>
+
+      <br />
+      <button mat-raised-button color="primary" type="submit">Registrar</button>
+      <button mat-raised-button color="accent" (click)="close()">
+        Cancelar
+      </button>
+      <br />
+    </mat-tab>
+  </mat-tab-group>
+</form>

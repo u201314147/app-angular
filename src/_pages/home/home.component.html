@@ -1,0 +1,136 @@
+<div class="main-container">
+  <div class="user">
+    <div>
+      <img src="../../assets/FutureMarket.png" />
+    </div>
+    <div id="talkbubble">
+      <h1 style="font-weight: 'bold';">Bienvenido a Future Market <br /></h1>
+      <p>Hola Cliente: {{ UserName }}<br /></p>
+      <p>¿Qué deseas hacer hoy?</p>
+      <button mat-button style="margin-left:30%" color="primary" (click)="SignOut()"  >
+        Cerrar Sesion
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <mat-card class="products">
+      <mat-card-header>
+        <mat-card-title>Productos</mat-card-title>
+        <mat-card-subtitle>Productos a la venta</mat-card-subtitle>
+      </mat-card-header>
+      <img
+        mat-card-image
+        src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/04/295717-que-es-malo-abusar-comida-rapida.png?itok=NWLAbya1"
+        alt="Comida"
+      />
+      <mat-card-content>
+        <p>
+          Podras encontrar los diferentes productos que esten en venta.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn" routerLink="/angular/products">
+          Ingresar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="orders">
+      <mat-card-header>
+        <mat-card-title>Ordenes</mat-card-title>
+        <mat-card-subtitle> Comprar un producto </mat-card-subtitle>
+      </mat-card-header>
+      <img
+        id="imagencarrito"
+        mat-card-image
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png"
+        alt="Carrito"
+      />
+      <mat-card-content>
+        <p>
+          Procede a comprar los productos requeridos.
+        </p>
+      </mat-card-content>
+      <br />
+      <mat-card-actions>
+        <button mat-button color="warn" routerLink="/angular/orders">
+          Ingresar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="profile" *ngIf="User == 'USER'">
+      <mat-card-header>
+        <mat-card-title>Perfil</mat-card-title>
+        <mat-card-subtitle> Revise su perfil </mat-card-subtitle>
+      </mat-card-header>
+      <img
+        id="imagencarrito"
+        mat-card-image
+        src="https://image.freepik.com/vector-gratis/perfil-empresario-dibujos-animados_18591-58479.jpg"
+        alt="profile"
+      />
+      <mat-card-content>
+        <p>
+          Obtenga informacion sobre su perfil
+        </p>
+      </mat-card-content>
+      <br />
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="IrPerfil()">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="categories" *ngIf="User != 'USER'">
+      <mat-card-header>
+        <mat-card-title>Categoria de productos</mat-card-title>
+        <mat-card-subtitle> Categorias de tus productos </mat-card-subtitle>
+      </mat-card-header>
+      <img
+        id="imagencarrito"
+        mat-card-image
+        src="https://images-na.ssl-images-amazon.com/images/I/613NI2n6vaL._AC_SX522_.jpg"
+        alt="Categoria"
+      />
+      <mat-card-content>
+        <p>
+          Administra las categorias de tus productos
+        </p>
+      </mat-card-content>
+      <br />
+      <mat-card-actions>
+        <button
+          mat-button
+          color="warn"
+          routerLink="/angular/product_categories"
+        >
+          Ingresar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="clients" *ngIf="User != 'USER'">
+      <mat-card-header>
+        <mat-card-title>Clientes</mat-card-title>
+        <mat-card-subtitle> Informacion de sus clientes </mat-card-subtitle>
+      </mat-card-header>
+      <img
+        id="imagencliente"
+        mat-card-image
+        src="https://blog.gosocket.net/wp-content/uploads/2015/01/Clientes.png"
+        alt="Clientes"
+      />
+      <mat-card-content>
+        <p>
+          Observe la informacion de cada uno de sus clientes
+        </p>
+      </mat-card-content>
+      <br />
+      <mat-card-actions>
+        <button mat-button color="warn" routerLink="/angular/clients">
+          Ingresar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

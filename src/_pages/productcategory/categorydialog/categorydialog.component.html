@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="registerOrUpdate()">
+  <mat-tab-group>
+    <mat-tab label="Producto">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Nombre de la categoria"
+          formControlName="productCategoryName"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Descripcion de la categoria"
+          type="textarea"
+          formControlName="productCategoryDescription"
+        />
+      </mat-form-field>
+      <br />
+      <button mat-raised-button color="primary" type="submit">Registrar</button>
+      <button mat-raised-button color="accent" (click)="close()" type="button">
+        Cancelar
+      </button>
+      <br />
+    </mat-tab>
+  </mat-tab-group>
+</form>

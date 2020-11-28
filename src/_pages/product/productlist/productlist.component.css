@@ -1,0 +1,26 @@
+mat-card {
+  max-width: 400px;
+  max-height: 600px;
+  margin: 1em;
+  text-align: left;
+  float: left;
+  margin-left: 20px;
+  display: grid;
+}
+
+mat-form-field {
+  display: block;
+}
+mat-card:hover {
+  background-color: #f1f1f1;
+}
+mat-card img {
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  height: 200px;
+  width: 400px;
+}
+
+mat-card button {
+  margin-top:0px;
+  place-items: center;
+}

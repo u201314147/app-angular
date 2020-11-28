@@ -1,0 +1,81 @@
+<div class="container">
+<div class="example-container">
+    <h1 class="main-title">Creación de orden</h1>
+    <h2 class="main-title">Selecciona los productos para generar tu orden</h2>
+
+    <div *ngIf="product == null">
+        <mat-form-field class="mat-form-field">
+            <mat-label>Clientes</mat-label>
+            <mat-select [(ngModel)]="customer" required>
+                <mat-option *ngFor="let opcion of customers" [value]="opcion">
+                    {{opcion.customerName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br><br>
+    </div>
+
+    <mat-form-field class="mat-form-field">
+        <mat-label>Productos</mat-label>
+        <mat-select [(ngModel)]="product" required matTooltip="Producto a comprar">
+            <mat-option *ngFor="let product of products" [value]="product"  required>
+                {{product.productName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" placeholder="Cantidad" matTooltip="Cantidad de productos a comprar" #quantity required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Numero de cuotas</mat-label>
+        <input matInput type="number" placeholder="Numero de Cuotas" matTooltip="Cantidad de cuotas a dividir" [(ngModel)]="quotesNumber" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Moneda de pago</mat-label>
+        <mat-select [(ngModel)]="stringCurrency" required matTooltip="Moneda en la que se pagará"  >
+            <mat-option *ngFor="let stringCurrency of currencies" [value]="stringCurrency" required>
+                {{stringCurrency}}
+            </mat-option>
+        </mat-select>    </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Frecuencia de pago</mat-label>
+            <mat-select [(ngModel)]="stringFrecuency" required matTooltip="Frecuencia de los pagos">
+                <mat-option *ngFor="let stringFrecuency of frecuencies" [value]="stringFrecuency" required>
+                    {{stringFrecuency}}
+                </mat-option>
+            </mat-select>    </mat-form-field>
+
+    <!--imprimimos los products, con su id y su precio-->
+    <br>
+    <div id="ingredientes">
+        <table style="width:100%">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr *ngFor="let orderDetails of orderDetails">
+                <td>{{orderDetails.product.productName}}</td>
+                <td>{{orderDetails.quantity}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <button mat-button type='button' color="primary" matTooltip="Agregar producto y cantidad a la orden" (click)="AddOrderDetail(quantity.value)">
+        Agregar
+    </button>
+    <button mat-button type='button' color="warn" matTooltip="Eliminar el ultimo producto" (click)="DeleteLastOrderDetial()"> Borrar
+    </button>
+    <br>
+
+    <div class="buttons">
+    <button mat-raised-button color="primary" (click)="register()" matTooltip="Registrar la orden">Registrar Orden</button>
+    <button mat-raised-button color="accent" (click)="close()" matTooltip="Cancelar la orden">Cancelar</button>
+</div>
+</div>
+</div>

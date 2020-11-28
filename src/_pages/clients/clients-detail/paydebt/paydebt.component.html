@@ -1,0 +1,27 @@
+<div>
+  <h1>Ingrese el monto a pagar</h1>
+  <mat-form-field appearance="outline">
+    <input matInput [(ngModel)]="amount" />
+  </mat-form-field>
+  <h3>Deuda total: {{ totalDebt }}</h3>
+
+  <div>
+    <button
+      style="margin-left: 10px;"
+      mat-button
+      color="primary"
+      (click)="Pay()"
+      matTooltip="Pagar la cuota"
+    >
+      Pagar
+    </button>
+    <button
+      style="margin-left: 10px;"
+      mat-button
+      color="warn"
+      (click)="CloseDialog()"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>

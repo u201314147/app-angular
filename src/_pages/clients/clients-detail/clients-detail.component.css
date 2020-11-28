@@ -1,0 +1,59 @@
+.container {
+  margin-left: 10%;
+  width: 80%;
+}
+.progressbar {
+  display: grid;
+  place-items: center;
+  margin-bottom: 15px;
+}
+
+mat-table {
+  width: 100%;
+
+  min-width: 300px;
+  margin-left: 0px;
+  box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+mat-paginator {
+  width: 100%;
+  min-width: 300px;
+
+  margin-left: 0px;
+  box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+#details li {
+  margin-top: 10px;
+  margin-right: 10%;
+  list-style-type: none;
+  list-style: none;
+  width: 500px;
+}
+.Debts {
+  margin-top: 20px;
+}
+
+#details {
+  padding-inline-start: 0;
+}
+.profile {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+input {
+  margin-top: 2px;
+}
+.progressbar mat-progress-bar {
+  height: 30px;
+  width: 80%;
+  border: 5px solid;
+}
+.header {
+  display: flex;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 20px !important;
+}

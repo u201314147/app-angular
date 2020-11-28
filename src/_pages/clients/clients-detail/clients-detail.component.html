@@ -1,0 +1,235 @@
+<div class="container">
+  <div class="header">
+    <h1 style="font-weight: bold;">Datos del cliente</h1>
+  </div>
+  <div class="progressbar">
+    <mat-progress-bar
+      class="example-margin"
+      [color]="color"
+      [mode]="mode"
+      [value]="value"
+    >
+    </mat-progress-bar>
+
+    <p>Disponible {{ showvalue }} de {{ client.loc.totalLineOfCredit }}</p>
+  </div>
+  <div class="profile">
+    <ul id="details">
+      <li>
+        <h2>
+          Nombre del cliente:
+          <h3>{{ client.customerName }}</h3>
+        </h2>
+      </li>
+      <li>
+        <h2>
+          Apellido del cliente:
+          <h3>{{ client.customerLastName }}</h3>
+        </h2>
+      </li>
+    </ul>
+    <ul id="details">
+      <li>
+        <h2>
+          Linea de credito disponible:
+          <h3>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [(ngModel)]="editableAvalibleLineOfCredit"
+                readonly
+                [readOnly]="readonly"
+              /> </mat-form-field
+            ><button
+              style="margin-left: 10px;"
+              matTooltip="Dinero disponible en la linea de crédito"
+              mat-mini-fab
+              color="primary"
+            >
+             ?
+            </button>
+          </h3>
+        </h2>
+      </li>
+      <li>
+        <h2>
+          Linea de credito total:
+          <h3>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [(ngModel)]="editableLineOfCredit"
+                readonly
+                [readOnly]="readonly"
+              /> </mat-form-field
+            ><button
+              style="margin-left: 10px;"
+              matTooltip="Dinero máximo disponible en la linea de crédito"
+              mat-mini-fab
+              color="primary"
+            >
+            ?
+          </button>
+          </h3>
+        </h2>
+      </li>
+    </ul>
+    <ul id="details">
+      <li>
+        <h2>
+          Tasa (Porcentaje):
+          <h3>
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [(ngModel)]="editableTea"
+                readonly
+                [readOnly]="readonly"
+              /> </mat-form-field
+            ><button
+              style="margin-left: 10px;"
+              matTooltip="Valor de la tasa que será aplicada"
+              mat-mini-fab
+              color="primary"
+            >
+            ?
+          </button>
+          </h3>
+        </h2>
+      </li>
+
+      <li>
+        <h2>
+          Tipo de tasa:
+          <h3>
+            <mat-form-field appearance="outline">
+              <mat-select [(ngModel)]="tasa" required [disabled]="readonly">
+                <mat-option *ngFor="let tasa of tasas" [value]="tasa" required>
+                  {{ tasa }}
+                </mat-option>
+              </mat-select> </mat-form-field
+            ><button
+              style="margin-left: 10px;"
+              matTooltip="Tasa en la cual los intereses serán aplicados"
+              mat-mini-fab
+              color="primary"
+            >
+            ?
+          </button>
+          </h3>
+        </h2>
+      </li>
+      <li>
+        <button
+          mat-button
+          color="warn"
+          (click)="ToggleToEdit()"
+          matTooltip="Clickear para poder editar"
+          *ngIf="User != 'USER'"
+        >
+          Editar Cliente
+        </button>
+        <button
+          style="margin-left: 5px;"
+          mat-fab
+          color="primary"
+          (click)="Save()"
+          matTooltip="Guardar los valores"
+          *ngIf="!readonly"
+        >
+          Guardar
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="Debts">
+    <mat-divider></mat-divider>
+    <h1 style="margin-top: 10px;">Deudas</h1>
+    <mat-table [dataSource]="dataQuotes" matSort>
+      <ng-container matColumnDef="numberQuotes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Numero de cuotas
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.numberQuotes }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="frecuency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Frecuencia
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.frecuency }} dias</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="currency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Moneda
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.currency }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="interestRate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Tasa
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row.interestRate * 100 }}%
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actualDebt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Deuda Actual
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.debt }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalDebt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Deuda Total
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.lastTotal }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button
+            mat-button
+            color="primary"
+            (click)="openDialog(row)"
+            *ngIf="User != 'USER'"
+            matTooltip="Clickear para pagar la cuota"
+          >
+            Pagar
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedQuoteColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedQuoteColumns"> </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div class="transactions">
+    <mat-divider></mat-divider>
+    <h1 style="margin-top: 10px;">Transacciones</h1>
+    <mat-table [dataSource]="dataTransactions" matSort>
+      <ng-container matColumnDef="Id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Id
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.transactionId }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Descripcion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Descripcion
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.description }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Estado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Estado
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[6, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
